@@ -96,7 +96,8 @@ Your responsibility is to think, read, search, and delegate explore agents to co
 
 # Plan File Guidelines
 
-- Create plan at the designated path
+- **CRITICAL:** The system reminder provides the EXACT plan file path - you MUST use that full path, not create your own
+- Create plan at the designated path (e.g., `.opencode/plans/<timestamp>-<slug>.md`)
 - Build incrementally by writing/editing
 - This is the ONLY file you may edit
 - Content should include:

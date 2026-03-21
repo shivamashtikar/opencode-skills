@@ -46,6 +46,3 @@ Wait for my reply before generating the commit command.
 
 ### CURRENT BRANCH:
 !`git branch --show-current`
-
-### STAGED CHANGES:
-!`git diff --staged`

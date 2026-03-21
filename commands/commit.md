@@ -44,5 +44,4 @@ Wait for my reply before generating the commit command.
 * **If NO breaking change is suspected:** Review the staged changes and provide **ONLY** the final executable `git commit -m "..." -m "..."` command. Do not output any extra conversational text or explanations.
 * **If a breaking change IS suspected:** Output **ONLY** your reasoning and the confirmation questions outlined in Rule 7.
 
-### CURRENT BRANCH:
-!`git branch --show-current`
+CURRENT BRANCH: !`git branch --show-current`

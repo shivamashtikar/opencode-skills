@@ -8,35 +8,19 @@ A collection of skills for [OpenCode](https://opencode.ai).
 
 ## Installation
 
-To use these skills, copy the skill folders to your `~/.config/opencode/skills/` directory:
+To use these skills, copy the skills, prompts and commands folders to your `~/.config/opencode/` directory:
 
 ```bash
 # Clone the repository (if you haven't already)
 git clone https://github.com/shivamashtikar/opencode-skills.git
 cd opencode-skills
 
-# Create Skills directory if not exists
-mkdir -p ~/.config/opencode/skills/
+# Copy all skills to opencode skills directory
+cp -r skills ~/.config/opencode/
 
-# Copy all skill folders to opencode skills directory
-cp -r skills/* ~/.config/opencode/skills/
-```
-
-Or copy individual skills:
-```bash
-cp -r skills/codebase-analyzer ~/.config/opencode/skills/
-```
-
-To use prompts, copy the prompts folder to your `~/.config/opencode/prompts/` directory:
-
-```bash
 # Copy all prompts to opencode prompts directory
 cp -r prompts ~/.config/opencode/
-```
 
-To use custom commands, copy the commands folder to your `~/.config/opencode/commands/` directory:
-
-```bash
 # Copy all commands to opencode commands directory
 cp -r commands ~/.config/opencode/
 ```
@@ -61,4 +45,3 @@ after this you need to update `~/.config/opencode/opencode.json` to use prompts 
   }
 }
 ```
-

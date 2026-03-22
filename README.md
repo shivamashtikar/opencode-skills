@@ -34,7 +34,14 @@ To use prompts, copy the prompts folder to your `~/.config/opencode/prompts/` di
 cp -r prompts ~/.config/opencode/
 ```
 
-after this you need to update `~/.config/opencode/opencode.json` to use prompts in your agent
+To use custom commands, copy the commands folder to your `~/.config/opencode/commands/` directory:
+
+```bash
+# Copy all commands to opencode commands directory
+cp -r commands ~/.config/opencode/
+```
+
+after this you need to update `~/.config/opencode/opencode.json` to use prompts and commands in your agent
 
 ```json
 {

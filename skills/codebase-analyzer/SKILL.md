@@ -8,6 +8,7 @@ metadata:
   workflow: exploration, onboarding, refactoring
   max_depth: 3
   parallel_agents: enabled
+  max_agents: 5
 ---
 
 ## What I do
@@ -499,9 +500,12 @@ Phase 3: "For complex handlers, trace data flow" (using @explore)
 
 ### 1. Over-Parallelization
 
+**Hard Limit**: Never spawn more than 5 agents at any point in time.
+
 Don't create subagents for trivial tasks that take <30 seconds.
-**Good:** 4-6 subagents for complex analysis
-**Bad:** 20 subagents each checking one file
+**Maximum**: 5 subagents total (hard limit)
+**Good**: 3-5 subagents for complex analysis
+**Bad**: 6+ subagents or 20 subagents each checking one file
 
 ### 2. Missing Context
 

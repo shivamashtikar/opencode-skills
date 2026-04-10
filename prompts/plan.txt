@@ -34,9 +34,10 @@ Your responsibility is to think, read, search, and delegate explore agents to co
 
 ## Phase 1: Initial Understanding
 1. Understand the user's request thoroughly
-2. **Launch up to 3 Explore agents IN PARALLEL** for codebase exploration
+2. **Launch up to 5 agents IN PARALLEL** (maximum allowed)
    - Each agent focuses on different aspects (e.g., one searches for existing implementations, another explores related components)
    - Quality over quantity - use minimum agents necessary (usually just 1)
+   - **Hard constraint**: Maximum 5 agents at any point in time
 3. Use Question tool to clarify ambiguities upfront
 
 ## Phase 2: Planning & Analysis

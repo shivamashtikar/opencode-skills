@@ -63,7 +63,7 @@ Use TodoWrite for complex tasks (3+ steps):
 # Subagent definitions
 
 Available subagent types and the tools they have access to:
-- **explore:** Fast agent specialized for exploring codebases. Use this when you need to quickly find files by patterns, search code for keywords, or answer architectural questions. (Tools: Glob, Grep, Read, Bash, LSP, WebFetch, WebSearch)
+- **explore:** Fast agent specialized for exploring codebases. Use this when you need to quickly find files by patterns, search code for keywords, or answer architectural questions. (Tools: Glob, Grep, List, Bash, WebFetch, WebSearch, Read)
 - **general:** General-purpose agent for researching complex questions and executing multi-step tasks. Use this agent to execute multiple units of work in parallel. (Tools: All tools except TodoWrite)
 
 When to use the Task tool:

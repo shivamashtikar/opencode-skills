@@ -1,31 +1,38 @@
 # Opencode Skills
 
-A collection of skills for [OpenCode](https://opencode.ai).
+A collection of skills, prompts, and commands for [OpenCode](https://opencode.ai).
 
-## Available Skills
+## Contents
 
-- [codebase-analyzer](./skills/codebase-analyzer/SKILL.md) - Analyze, map, and understand complex codebases
+- **[skills/](./skills/)** — Specialized agent skills
+  - [codebase-analyzer](./skills/codebase-analyzer/SKILL.md) - Analyze, map, and understand complex codebases
+- **[prompts/](./prompts/)** — System prompts for opencode agents
+  - [build.txt](./prompts/build.txt) - Primary build agent prompt
+  - [plan.txt](./prompts/plan.txt) - Plan mode (read-only) agent prompt
+  - [explore.txt](./prompts/explore.txt) - Explore subagent prompt
+  - [build-switch.txt](./prompts/build-switch.txt) - Plan→build transition reminder
+- **[commands/](./commands/)** — Slash commands
+  - [commit.md](./commands/commit.md) - Generate a semantic-release commit message (`/commit`)
+  - [explain.md](./commands/explain.md) - Produce a technical overview of the codebase (`/explain`)
 
 ## Installation
 
-To use these skills, copy the skills, prompts and commands folders to your `~/.config/opencode/` directory:
+Copy the `skills`, `prompts`, and `commands` folders into your `~/.config/opencode/` directory:
 
 ```bash
 # Clone the repository (if you haven't already)
 git clone https://github.com/shivamashtikar/opencode-skills.git
 cd opencode-skills
 
-# Copy all skills to opencode skills directory
-cp -r skills ~/.config/opencode/
-
-# Copy all prompts to opencode prompts directory
-cp -r prompts ~/.config/opencode/
-
-# Copy all commands to opencode commands directory
+# Copy skills, prompts, and commands to opencode config directory
+cp -r skills   ~/.config/opencode/
+cp -r prompts  ~/.config/opencode/
 cp -r commands ~/.config/opencode/
 ```
 
-after this you need to update `~/.config/opencode/opencode.json` to use prompts and commands in your agent
+## Configuration
+
+Update `~/.config/opencode/opencode.json` to wire the prompts and commands into your agents:
 
 ```json
 {
@@ -45,3 +52,9 @@ after this you need to update `~/.config/opencode/opencode.json` to use prompts 
   }
 }
 ```
+
+> **Note:** The `build-switch.txt` prompt is injected automatically by opencode when transitioning from plan mode to build mode — it does not need to be referenced in `opencode.json`.
+
+## License
+
+[MIT](./LICENSE)

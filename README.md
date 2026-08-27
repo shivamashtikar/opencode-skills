@@ -55,6 +55,16 @@ Update `~/.config/opencode/opencode.json` to wire the prompts and commands into 
 
 > **Note:** The `build-switch.txt` prompt is injected automatically by opencode when transitioning from plan mode to build mode — it does not need to be referenced in `opencode.json`.
 
+## Required Environment Variable
+
+The `plan.txt` prompt uses the `plan_exit` tool for the plan→build handoff. This tool is only available when opencode's experimental plan mode is enabled. Set this environment variable in your shell profile (`~/.zshrc` or `~/.bashrc`):
+
+```bash
+export OPENCODE_EXPERIMENTAL_PLAN_MODE=1
+```
+
+Without this flag, the `plan_exit` tool is not registered and the agent cannot call it — you would need to manually switch from plan to build mode.
+
 ## License
 
 [MIT](./LICENSE)

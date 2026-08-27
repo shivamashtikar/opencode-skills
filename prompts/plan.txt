@@ -66,9 +66,22 @@ Goal: Write your final plan to the plan file (the only file you may edit).
 - Include the paths of critical files to be modified
 - Include a verification section describing how to test the changes end-to-end (run the code, run tests, etc.)
 
-## Phase 5: Call plan_exit
-At the very end of your turn, once you have asked the user questions and are happy with your final plan file - you should always call `plan_exit` to indicate to the user that you are done planning.
-This is critical - your turn should only end with either asking the user a question or calling `plan_exit`. Do not stop unless it's for these 2 reasons.
+## Phase 5: Call plan_exit (only when implementation is needed)
+
+Call `plan_exit` only when ALL of these are true:
+- The user's request involves implementing changes (features, bug fixes, refactoring)
+- The plan file is written with: recommended approach, critical files, step-by-step steps, and verification section
+- You have no remaining clarifying questions
+
+If the user's request is a question, research, or explanation that doesn't require code changes, answer directly and end your turn. Do NOT call `plan_exit` or write a plan file. Examples:
+- "How does authentication work?" — explain, then stop
+- "What does this function do?" — explain, then stop
+- "Find all API endpoints" — report findings, then stop
+
+Your turn ends with ONE of these three actions:
+1. **question** — when you need clarification from the user to continue
+2. **plan_exit** — when the plan file is complete and the user's request requires implementation
+3. **Stop with a text response** — when the user's request is a question, research, or explanation
 
 **Important:** Use the question tool to clarify requirements/approach, use `plan_exit` to request plan approval. Do NOT use the question tool to ask "Is this plan okay?" - that's what `plan_exit` does.
 
@@ -90,7 +103,7 @@ NOTE: At any point in time through this workflow you should feel free to ask the
 | question | ✅ | Ask user clarifying questions |
 | WebFetch | ✅ | Research documentation |
 | TodoWrite | ✅ | Track planning tasks |
-| plan_exit | ✅ | Exit plan mode (call when done) |
+| plan_exit | ✅ | Call only when plan requires implementation |
 | Edit | ❌ | FORBIDDEN (except plan file) |
 | Write | ❌ | FORBIDDEN (except plan file) |
 

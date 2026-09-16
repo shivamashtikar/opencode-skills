@@ -17,6 +17,22 @@ A collection of skills, prompts, and commands for [OpenCode](https://opencode.ai
 
 ## Installation
 
+### Quick install (prompts only)
+
+To grab just the agent prompts without cloning the repo, `curl` each file directly into `~/.config/opencode/prompts/`:
+
+```bash
+mkdir -p ~/.config/opencode/prompts
+curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/build.txt       -o ~/.config/opencode/prompts/build.txt
+curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/plan.txt        -o ~/.config/opencode/prompts/plan.txt
+curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/explore.txt     -o ~/.config/opencode/prompts/explore.txt
+curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/build-switch.txt -o ~/.config/opencode/prompts/build-switch.txt
+```
+
+> **Note:** Use the `raw.githubusercontent.com` URLs as shown above — the `github.com/.../blob/main/...` URLs return the HTML page, not the file content.
+
+### Full installation
+
 Copy the `skills`, `prompts`, and `commands` folders into your `~/.config/opencode/` directory:
 
 ```bash

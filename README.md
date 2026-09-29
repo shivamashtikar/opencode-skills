@@ -10,7 +10,6 @@ A collection of skills, prompts, and commands for [OpenCode](https://opencode.ai
   - [build.txt](./prompts/build.txt) - Primary build agent prompt
   - [plan.txt](./prompts/plan.txt) - Plan mode (read-only) agent prompt
   - [explore.txt](./prompts/explore.txt) - Explore subagent prompt
-  - [build-switch.txt](./prompts/build-switch.txt) - Plan→build transition reminder
 - **[commands/](./commands/)** — Slash commands
   - [commit.md](./commands/commit.md) - Generate a semantic-release commit message (`/commit`)
   - [explain.md](./commands/explain.md) - Produce a technical overview of the codebase (`/explain`)
@@ -26,7 +25,6 @@ mkdir -p ~/.config/opencode/prompts
 curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/build.txt       -o ~/.config/opencode/prompts/build.txt
 curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/plan.txt        -o ~/.config/opencode/prompts/plan.txt
 curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/explore.txt     -o ~/.config/opencode/prompts/explore.txt
-curl -sL https://raw.githubusercontent.com/shivamashtikar/opencode-skills/main/prompts/build-switch.txt -o ~/.config/opencode/prompts/build-switch.txt
 ```
 
 > **Note:** Use the `raw.githubusercontent.com` URLs as shown above — the `github.com/.../blob/main/...` URLs return the HTML page, not the file content.
@@ -48,38 +46,35 @@ cp -r commands ~/.config/opencode/
 
 ## Configuration
 
-Update `~/.config/opencode/opencode.json` to wire the prompts and commands into your agents:
+Update `~/.config/opencode/opencode.json` to wire the prompts and commands into your agents (OpenCode V2 shape):
 
 ```json
 {
-  "agent": {
+  "$schema": "https://opencode.ai/config.json",
+  "agents": {
     "build": {
       "mode": "primary",
-      "prompt": "{file:./prompts/build.txt}"
+      "system": "{file:./prompts/build.txt}"
     },
     "plan": {
       "mode": "primary",
-      "prompt": "{file:./prompts/plan.txt}"
+      "system": "{file:./prompts/plan.txt}"
     },
     "explore": {
       "mode": "subagent",
-      "prompt": "{file:./prompts/explore.txt}"
+      "system": "{file:./prompts/explore.txt}"
     }
   }
 }
 ```
 
-> **Note:** The `build-switch.txt` prompt is injected automatically by opencode when transitioning from plan mode to build mode — it does not need to be referenced in `opencode.json`.
+## Plan mode in OpenCode V2
 
-## Required Environment Variable
+The V1 `OPENCODE_EXPERIMENTAL_PLAN_MODE` environment variable and the `plan_exit` tool no longer exist in V2 — remove the variable from your shell profile if it is set. In V2:
 
-The `plan.txt` prompt uses the `plan_exit` tool for the plan→build handoff. This tool is only available when opencode's experimental plan mode is enabled. Set this environment variable in your shell profile (`~/.zshrc` or `~/.bashrc`):
-
-```bash
-export OPENCODE_EXPERIMENTAL_PLAN_MODE=1
-```
-
-Without this flag, the `plan_exit` tool is not registered and the agent cannot call it — you would need to manually switch from plan to build mode.
+- Agents replace modes. Switch between them with `Shift+Tab`, `Ctrl+X` then `A`, or `/agents`.
+- The plan agent is read-only by permission: it may only write plan files under `~/.opencode/plan/`.
+- The plan agent ends by presenting the plan and telling you to switch to the build agent to implement it.
 
 ## License
 

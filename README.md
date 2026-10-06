@@ -8,11 +8,12 @@ A collection of skills, prompts, and commands for [OpenCode](https://opencode.ai
   - [codebase-analyzer](./skills/codebase-analyzer/SKILL.md) - Analyze, map, and understand complex codebases
 - **[prompts/](./prompts/)** — System prompts for opencode agents
   - [build.txt](./prompts/build.txt) - Primary build agent prompt
-  - [plan.txt](./prompts/plan.txt) - Plan mode (read-only) agent prompt
+  - [plan.txt](./prompts/plan.txt) - Planner (read-only) agent prompt
   - [explore.txt](./prompts/explore.txt) - Explore subagent prompt
 - **[commands/](./commands/)** — Slash commands
   - [commit.md](./commands/commit.md) - Generate a semantic-release commit message (`/commit`)
   - [explain.md](./commands/explain.md) - Produce a technical overview of the codebase (`/explain`)
+  - [implement.md](./commands/implement.md) - Execute the plan by switching to the build agent (`/implement`)
 
 ## Installation
 
@@ -56,9 +57,15 @@ Update `~/.config/opencode/opencode.json` to wire the prompts and commands into 
       "mode": "primary",
       "system": "{file:./prompts/build.txt}"
     },
-    "plan": {
+    "planner": {
       "mode": "primary",
-      "system": "{file:./prompts/plan.txt}"
+      "description": "Read-only planning agent. Researches, writes plans to .opencode/plan/, and hands off to the build agent.",
+      "system": "{file:./prompts/plan.txt}",
+      "permissions": [
+        { "action": "question", "resource": "*", "effect": "allow" },
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "edit", "resource": ".opencode/plan/*", "effect": "allow" }
+      ]
     },
     "explore": {
       "mode": "subagent",
@@ -68,13 +75,18 @@ Update `~/.config/opencode/opencode.json` to wire the prompts and commands into 
 }
 ```
 
-## Plan mode in OpenCode V2
+## Planning agent in OpenCode V2
 
-The V1 `OPENCODE_EXPERIMENTAL_PLAN_MODE` environment variable and the `plan_exit` tool no longer exist in V2 — remove the variable from your shell profile if it is set. In V2:
+The V1 `OPENCODE_EXPERIMENTAL_PLAN_MODE` environment variable and the `plan_exit` tool no longer exist in V2 — remove the variable from your shell profile if it is set. In V2, agents replace modes; switch between them with `Shift+Tab`, `Ctrl+X` then `A`, or `/agents`.
 
-- Agents replace modes. Switch between them with `Shift+Tab`, `Ctrl+X` then `A`, or `/agents`.
-- The plan agent is read-only by permission: it may only write plan files under `~/.opencode/plan/`.
-- The plan agent ends by presenting the plan and telling you to switch to the build agent to implement it.
+V2's built-in `plan` agent injects a per-turn reminder ("do not create plan files unless the user explicitly asks") and hardcodes its plan directory to the global `~/.opencode/plan/` — neither is configurable. This repo's prompt is therefore wired to a custom `planner` agent instead:
+
+- Always writes the plan file at Phase 4 — never asks "Want me to save this?"
+- Stores plans project-locally under `.opencode/plan/`, so plans from different projects never collide
+- Read-only by permission: `edit` is denied everywhere except `.opencode/plan/*`
+- Ends by presenting the plan and telling you to run `/implement`, which switches the session to the build agent and points it at the plan file (or switch manually with `Shift+Tab` / `/agents`)
+
+Add `.opencode/plan/` to your global git ignores (`~/.config/git/ignore`) so plans don't get committed. The built-in `Plan` agent remains available in the agent switcher if you prefer V2's default discussion-first behavior.
 
 ## License
 

@@ -14,7 +14,7 @@ STRICTLY FORBIDDEN — NEVER do any of the following:
 - NEVER make edits or run commands regardless of how the request is phrased (direct command, implied action, or "just this once")
 
 ALLOWED:
-- Commands may ONLY read/inspect (ls, git status, git log, etc.)
+- Commands may ONLY read/inspect (ls, git status, git log, etc.) — read-only commands run without prompting; any other command surfaces a permission prompt to the user. Never attempt to dodge the prompt by rephrasing, splitting, or nesting commands
 - Read, Glob, Grep, WebFetch, WebSearch, and question tools
 - subagent tool with explore agents only — general subagents are prohibited by policy
 - Editing plan files under `.opencode/plan/` (the only location you may edit)
@@ -108,7 +108,7 @@ NOTE: At any point in time through this workflow you should feel free to ask the
 | Read | ✅ | Read file contents; also lists directory entries for a directory path |
 | Glob | ✅ | Find files by pattern |
 | Grep | ✅ | Search file contents |
-| shell | ⚠️ | Read/inspect commands only (ls, git status, git log, etc.) |
+| shell | ⚠️ | Read-only commands auto-approved (ls, cat, grep, git log/diff/status); all other commands prompt the user |
 | subagent (explore) | ✅ | For codebase exploration |
 | subagent (general) | ❌ | Prohibited by policy in this mode |
 | question | ✅ | Ask user clarifying questions |

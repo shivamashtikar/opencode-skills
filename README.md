@@ -64,7 +64,32 @@ Update `~/.config/opencode/opencode.json` to wire the prompts and commands into 
       "permissions": [
         { "action": "question", "resource": "*", "effect": "allow" },
         { "action": "edit", "resource": "*", "effect": "deny" },
-        { "action": "edit", "resource": ".opencode/plan/*", "effect": "allow" }
+        { "action": "edit", "resource": ".opencode/plan/*", "effect": "allow" },
+        { "action": "shell", "resource": "*", "effect": "ask" },
+        { "action": "shell", "resource": "ls*", "effect": "allow" },
+        { "action": "shell", "resource": "pwd", "effect": "allow" },
+        { "action": "shell", "resource": "cd*", "effect": "allow" },
+        { "action": "shell", "resource": "cat*", "effect": "allow" },
+        { "action": "shell", "resource": "grep*", "effect": "allow" },
+        { "action": "shell", "resource": "rg*", "effect": "allow" },
+        { "action": "shell", "resource": "find*", "effect": "allow" },
+        { "action": "shell", "resource": "head*", "effect": "allow" },
+        { "action": "shell", "resource": "tail*", "effect": "allow" },
+        { "action": "shell", "resource": "wc*", "effect": "allow" },
+        { "action": "shell", "resource": "which*", "effect": "allow" },
+        { "action": "shell", "resource": "file*", "effect": "allow" },
+        { "action": "shell", "resource": "stat*", "effect": "allow" },
+        { "action": "shell", "resource": "du*", "effect": "allow" },
+        { "action": "shell", "resource": "df*", "effect": "allow" },
+        { "action": "shell", "resource": "git status*", "effect": "allow" },
+        { "action": "shell", "resource": "git log*", "effect": "allow" },
+        { "action": "shell", "resource": "git diff*", "effect": "allow" },
+        { "action": "shell", "resource": "git show*", "effect": "allow" },
+        { "action": "shell", "resource": "git branch*", "effect": "allow" },
+        { "action": "shell", "resource": "git blame*", "effect": "allow" },
+        { "action": "shell", "resource": "git rev-parse*", "effect": "allow" },
+        { "action": "shell", "resource": "git ls-files*", "effect": "allow" },
+        { "action": "shell", "resource": "git grep*", "effect": "allow" }
       ]
     },
     "explore": {
@@ -83,7 +108,7 @@ V2's built-in `plan` agent injects a per-turn reminder ("do not create plan file
 
 - Always writes the plan file at Phase 4 — never asks "Want me to save this?"
 - Stores plans project-locally under `.opencode/plan/`, so plans from different projects never collide
-- Read-only by permission: `edit` is denied everywhere except `.opencode/plan/*`
+- Read-only by permission: `edit` is denied everywhere except `.opencode/plan/*`; shell is limited to read-only commands (`ls`, `cat`, `grep`, `git log/diff/status`, ...) — anything else prompts instead of running silently (ssh MCP tools follow the global permission rules)
 - Ends by presenting the plan and telling you to run `/implement`, which switches the session to the build agent and points it at the plan file (or switch manually with `Shift+Tab` / `/agents`)
 
 Add `.opencode/plan/` to your global git ignores (`~/.config/git/ignore`) so plans don't get committed. The built-in `Plan` agent remains available in the agent switcher if you prefer V2's default discussion-first behavior.

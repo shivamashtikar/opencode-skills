@@ -6,6 +6,8 @@ A collection of skills, prompts, and commands for [OpenCode](https://opencode.ai
 
 - **[skills/](./skills/)** — Specialized agent skills
   - [codebase-analyzer](./skills/codebase-analyzer/SKILL.md) - Analyze, map, and understand complex codebases
+  - [html](./skills/html/SKILL.md) - Generate self-contained Bootstrap 5 HTML reports with Chart.js charts and Mermaid diagrams
+  - [pdf](./skills/pdf/SKILL.md) - Generate polished PDF reports with ReportLab + matplotlib
 - **[prompts/](./prompts/)** — System prompts for opencode agents
   - [build.txt](./prompts/build.txt) - Primary build agent prompt
   - [plan.txt](./prompts/plan.txt) - Planner (read-only) agent prompt
